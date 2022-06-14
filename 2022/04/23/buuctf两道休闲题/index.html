@@ -1,0 +1,390 @@
+<script type='text/javascript' src='/js/myjs.js'></script>
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>buuctf两道休闲题 - bubble down</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="2021羊城杯babysmcSMC概念提前将重要的代码...">
+  <meta name="author" content="bubble-down">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: true
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '',
+          api: ''
+        },
+        motto: {
+          default: '莫等闲，白了少年头，空悲切',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="lock-screen">
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">buuctf两道休闲题</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/archives " class="underline "> 归档</a>
+      </li><li class="menu-item">
+        <a href="/tags " class="underline "> 标签</a>
+      </li><li class="menu-item">
+        <a href="/categories" class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/about" class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">bubble down</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/buuctf%E4%B8%A4%E9%81%93%E4%BC%91%E9%97%B2%E9%A2%98/0.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">buuctf两道休闲题</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>April 23, 2022</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>2137</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h2 id="2021羊城杯babysmc"><a href="#2021羊城杯babysmc" class="headerlink" title="2021羊城杯babysmc"></a>2021羊城杯babysmc</h2><h3 id="SMC概念"><a href="#SMC概念" class="headerlink" title="SMC概念"></a>SMC概念</h3><pre><code>提前将重要的代码节进行加密，或将加密数据提前存放在内存中，并且配有一个解密函数。
+再静态调试中很难观察出有用的信息
+这种加密算法可以被用来做免杀，防止特征码被查杀
+
+特征：在汇编代码中夹杂大片的数据
+</code></pre>
+<h3 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h3><p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/buuctf%E4%B8%A4%E9%81%93%E4%BC%91%E9%97%B2%E9%A2%98/smc1.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>打开程序按顺序分析发现这一步有一个直接访问内存的Call</p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/buuctf%E4%B8%A4%E9%81%93%E4%BC%91%E9%97%B2%E9%A2%98/smc3.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>执行call之后下方数据发生变化<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/buuctf%E4%B8%A4%E9%81%93%E4%BC%91%E9%97%B2%E9%A2%98/smc4.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>从自解密函数向下找，找到所属的retn，将retn包含的函数体框起来，右键按照图里操作<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/buuctf%E4%B8%A4%E9%81%93%E4%BC%91%E9%97%B2%E9%A2%98/smc5.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>出现这个窗口选择force，之后就能F5了<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/buuctf%E4%B8%A4%E9%81%93%E4%BC%91%E9%97%B2%E9%A2%98/smc6.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>跟随动态调试进入解密后的函数，这个程序是变形的base64<br>四个字母为一组，右移0,2,4,6后，作为v95的角标，分别和0xA6,0XA3,0XA9,0XAC做与运算<br><img   class="lazyload" data-original="https://github.com/qwer597/123456aaa/blob/main/buuctf%E4%B8%A4%E9%81%93%E4%BC%91%E9%97%B2%E9%A2%98/smc7.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>输入数组做完以上运算和v84做比较</p>
+<h3 id="脚本思路"><a href="#脚本思路" class="headerlink" title="脚本思路"></a>脚本思路</h3><p>先将字符串四个一组做与运算的反运算</p>
+<p>然后和v95数组内的值比较，得到对应的角标</p>
+<p>将角标字符串做base64反向编码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"> </span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">	unsigned char key[] = &quot;H&gt;oQn6aqLr&#123;DH6odhdm0dMe`MBo?lRglHtGPOdobDlknejmGI|ghDb&lt;4&quot;;</span><br><span class="line">	int data[] =				</span><br><span class="line">	&#123;	</span><br><span class="line">  		0xE4, 0xC4, 0xE7, 0xC7, 0xE6, 0xC6, 0xE1, 0xC1, 0xE0, 0xC0, </span><br><span class="line">  		0xE3, 0xC3, 0xE2, 0xC2, 0xED, 0xCD, 0xEC, 0xCC, 0xEF, 0xCF, </span><br><span class="line">  		0xEE, 0xCE, 0xE9, 0xC9, 0xE8, 0xC8, 0xEB, 0xCB, 0xEA, 0xCA, </span><br><span class="line">  		0xF5, 0xD5, 0xF4, 0xD4, 0xF7, 0xD7, 0xF6, 0xD6, 0xF1, 0xD1, </span><br><span class="line">  		0xF0, 0xD0, 0xF3, 0xD3, 0xF2, 0xD2, 0xFD, 0xDD, 0xFC, 0xDC, </span><br><span class="line">  		0xFF, 0xDF, 0x95, 0x9C, 0x9D, 0x92, 0x93, 0x90, 0x91, 0x96, </span><br><span class="line">  		0x97, 0x94, 0x8A, 0x8E</span><br><span class="line">	&#125;;</span><br><span class="line">	int xr[] = &#123;0xA6, 0xA3, 0xA9, 0xAC&#125;;</span><br><span class="line">	int i, j;</span><br><span class="line">	unsigned int v3;</span><br><span class="line">	int flag[100] = &#123;0&#125;;</span><br><span class="line">	</span><br><span class="line">	for(i = 0; i &lt; 56; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		key[i] ^= xr[i % 4];</span><br><span class="line">//		printf(&quot;%d &quot;,key[i]);	</span><br><span class="line">	&#125;</span><br><span class="line">//	printf(&quot;\n&quot;);</span><br><span class="line">	for(i = 0; i &lt; 56; i++)	</span><br><span class="line">		for(j = 0; j &lt; 64; j++)</span><br><span class="line">			if(key[i] == data[j])</span><br><span class="line">				&#123;</span><br><span class="line">					key[i] = j;					 </span><br><span class="line">//					printf(&quot;%d:%d &quot;,i,j);</span><br><span class="line">					break;</span><br><span class="line">				&#125;</span><br><span class="line">	for(i = 0, j = 0; i &lt; 56; i += 4, j += 3)</span><br><span class="line">	&#123;</span><br><span class="line">		v3 = key[i+3] + (key[i+2] &lt;&lt; 6) + (key[i+1] &lt;&lt; 12) + (key[i] &lt;&lt; 18);</span><br><span class="line">		flag[j] = (v3 &gt;&gt; 16) &amp; 0xFF;</span><br><span class="line">		flag[j+1] = (v3 &gt;&gt; 8) &amp; 0xFF;</span><br><span class="line">		flag[j+2] = v3 &amp; 0xFF;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	for(i = 0; i &lt; 100; i++)</span><br><span class="line">		printf(&quot;%c&quot;,flag[i]); </span><br><span class="line">	</span><br><span class="line">	return 0;	</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h2 id="Buuctf-Crakme"><a href="#Buuctf-Crakme" class="headerlink" title="Buuctf Crakme"></a>Buuctf Crakme</h2><h3 id="Mains"><a href="#Mains" class="headerlink" title="Mains"></a>Mains</h3><p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/buuctf%E4%B8%A4%E9%81%93%E4%BC%91%E9%97%B2%E9%A2%98/crakme1.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>v3返回值恒定是1<br>sub_CE1830的返回值为1    ——&gt;Format</p>
+<p>format&#x3D;congratulation<br>v4&#x3D;pleace try again</p>
+<h3 id="Sub-CE1830"><a href="#Sub-CE1830" class="headerlink" title="Sub_CE1830"></a>Sub_CE1830</h3><p><img   class="lazyload" data-original="https://github.com/qwer597/123456aaa/blob/main/buuctf%E4%B8%A4%E9%81%93%E4%BC%91%E9%97%B2%E9%A2%98/crakme2.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/buuctf%E4%B8%A4%E9%81%93%E4%BC%91%E9%97%B2%E9%A2%98/crakme3.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<h3 id="Sub-CE1470"><a href="#Sub-CE1470" class="headerlink" title="Sub_CE1470"></a>Sub_CE1470</h3><p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/buuctf%E4%B8%A4%E9%81%93%E4%BC%91%E9%97%B2%E9%A2%98/crakme4.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">box = [0x2a,0xd7,0x92,0xe9,0x53,0xe2,0xc4,0xcd]</span><br><span class="line">a =[100,98,97,112,112,115,101,99]</span><br><span class="line">for i in range(8):</span><br><span class="line">    print(hex(a[i]^box[i])[2:],end = &#x27;&#x27;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>bubble-down</li>
+    <li><strong>本文链接：</strong><a href="http://example.com/2022/04/23/buuctf%E4%B8%A4%E9%81%93%E4%BC%91%E9%97%B2%E9%A2%98/index.html" title="http:&#x2F;&#x2F;example.com&#x2F;2022&#x2F;04&#x2F;23&#x2F;buuctf%E4%B8%A4%E9%81%93%E4%BC%91%E9%97%B2%E9%A2%98&#x2F;index.html">http:&#x2F;&#x2F;example.com&#x2F;2022&#x2F;04&#x2F;23&#x2F;buuctf%E4%B8%A4%E9%81%93%E4%BC%91%E9%97%B2%E9%A2%98&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/buuctf/" rel="tag">buuctf</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2022/04/24/%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98lab12-4/"><i class="iconfont iconleft"></i>恶意代码分析实战lab12-4</a>
+    <a href="/2022/04/14/%E9%94%AE%E7%9B%98%E9%92%A9%E5%AD%90/">键盘钩子<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2021%E7%BE%8A%E5%9F%8E%E6%9D%AFbabysmc"><span class="toc-text">2021羊城杯babysmc</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SMC%E6%A6%82%E5%BF%B5"><span class="toc-text">SMC概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98%E8%BF%87%E7%A8%8B"><span class="toc-text">解题过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC%E6%80%9D%E8%B7%AF"><span class="toc-text">脚本思路</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Buuctf-Crakme"><span class="toc-text">Buuctf Crakme</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mains"><span class="toc-text">Mains</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sub-CE1830"><span class="toc-text">Sub_CE1830</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sub-CE1470"><span class="toc-text">Sub_CE1470</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC"><span class="toc-text">脚本</span></a></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="tencent://message/?Menu=yes&uin=2549294026 "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#12B7F5'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconQQ "></i>
+      </a><a 
+        href="javascript:; "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#09BB07'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconwechat-fill "></i>
+      </a><a 
+        href="https://github.com/zhaoo "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="mailto:2549294026@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">bubble down</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+
+<!-- 不蒜子统计 -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</footer>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

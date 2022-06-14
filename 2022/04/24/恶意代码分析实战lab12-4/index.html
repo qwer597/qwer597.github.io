@@ -1,0 +1,380 @@
+<script type='text/javascript' src='/js/myjs.js'></script>
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>恶意代码分析实战lab12-4 - bubble down</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="监控分析大量windowsAPI，这其中对进程和资源节...">
+  <meta name="author" content="bubble-down">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: true
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '',
+          api: ''
+        },
+        motto: {
+          default: '莫等闲，白了少年头，空悲切',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="lock-screen">
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">恶意代码分析实战lab12-4</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/archives " class="underline "> 归档</a>
+      </li><li class="menu-item">
+        <a href="/tags " class="underline "> 标签</a>
+      </li><li class="menu-item">
+        <a href="/categories" class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/about" class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">bubble down</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/lab12-4/0.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">恶意代码分析实战lab12-4</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>April 24, 2022</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>1142</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h2 id="监控分析"><a href="#监控分析" class="headerlink" title="监控分析"></a>监控分析</h2><p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/lab12-4/1.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>大量windowsAPI，这其中对进程和资源节操作<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/lab12-4/2.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>这里边发现在system32下的非windows自带的wuodmgrd.exe文件<br>最下边还有一个网址，估计是下载updater.exe<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/lab12-4/3.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>四个资源节名称作为字符串反复出现，所以去resource hacker里看看文件资源节<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/lab12-4/4.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>Ida里那么多代码，资源节里这么空明显是被认为修改过，将资源节导出待用<br><img   class="lazyload" data-original="https://github.com/qwer597/123456aaa/blob/main/lab12-4/5.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>我们发现在system32下打开wupdmgr.exe，这是windows自动更新的程序<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/lab12-4/6.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>而且在system32下写入psapi.dll<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/lab12-4/7.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>经过MD5比对样本的代码段资源就是wupdmgr.exe，可见wupdmgr.exe被篡改</p>
+<h2 id="反汇编分析"><a href="#反汇编分析" class="headerlink" title="反汇编分析"></a>反汇编分析</h2><p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/lab12-4/8.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/lab12-4/9.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>首先在psapi.dll中导出三个函数,分别是获得进程句柄，进程此名称字符串，进程PID<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/lab12-4/10.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>接着在EnumProcsses函数中获取所有进程PID<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/lab12-4/11.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>进入一个循环，遍历dwProcessId，并作为参数传入sub_401000</p>
+<p>Sub_401000检测PID坐在进程的名字是不是winlogon.exe</p>
+<p>如果名字相等，就将dwProcessID数组的角标保存在var_1234中</p>
+<h3 id="Sub-40100"><a href="#Sub-40100" class="headerlink" title="Sub_40100"></a>Sub_40100</h3><p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/lab12-4/12.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>Sub_401000的第一部分是写入两个字符串<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/lab12-4/13.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>左边是string1，右边是string2<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/lab12-4/14.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>GetModuleBaseNameA中查PID对应进程的名字，存在参数String1中</p>
+<p>在下边与String2比较，等于就返回1，否则返回0</p>
+<h3 id="Sub-401174"><a href="#Sub-401174" class="headerlink" title="Sub_401174"></a>Sub_401174</h3><p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/lab12-4/15.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>此函数的目的就是运行sfc_os.dll内的2号函数<br>借助CreateRemoteThread函数将2号函数注入到winlogon.exe中<br>数CreateRemoteThread函数在启动exe时需要进程token<br>Sub_4010FC就是获取token权限的</p>
+<p>** 回到Main函数中**<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/lab12-4/16.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>获取wupdmgr.exe的地址，这个程序是windows自动更新的地址<br>再将winup.exe（木马）这个字符串和临时文件夹路径拼在一起<br>随后用MoveFile将wupdmgr.exe移动到临时文件存储区并改名为winup.exe</p>
+<h3 id="Sub-4011FC"><a href="#Sub-4011FC" class="headerlink" title="Sub_4011FC"></a>Sub_4011FC</h3><p><img   class="lazyload" data-original="https://github.com/qwer597/123456aaa/blob/main/lab12-4/17.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>先将windows目录和wupdmgr的路径拼接<br>获取BIN类型，名字为#101的代码段数据<br>同时获得本进程句柄</p>
+<p><img   class="lazyload" data-original="https://github.com/qwer597/123456aaa/blob/main/lab12-4/18.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>在接下来的CreatfileA中打开wupdmgr线程并重写</p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/19.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>通过WriteFile把恶意代码写入假的wupdmgr.exe<br>最后用WinExec执行</p>
+<h3 id="Wupdmgr-exe"><a href="#Wupdmgr-exe" class="headerlink" title="Wupdmgr.exe"></a>Wupdmgr.exe</h3><p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/20.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>上一节说到，wupdmgr被转移到winup里<br>现在构造winup路径并执行</p>
+<p>之后调用URLDownloadToFile下载网址的程序并更名为wupdmgrd.exe</p>
+<p>注意这里的exe文件名字加了个d用于隐藏</p>
+<p>然后WinExec执行下载的程序</p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>bubble-down</li>
+    <li><strong>本文链接：</strong><a href="http://example.com/2022/04/24/%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98lab12-4/index.html" title="http:&#x2F;&#x2F;example.com&#x2F;2022&#x2F;04&#x2F;24&#x2F;%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98lab12-4&#x2F;index.html">http:&#x2F;&#x2F;example.com&#x2F;2022&#x2F;04&#x2F;24&#x2F;%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%98lab12-4&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%A8%E9%A9%AC/" rel="tag">木马</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2022/05/02/%E7%BD%91%E9%BC%8E%E6%9D%AF-2020-%E9%9D%92%E9%BE%99%E7%BB%84jocker/"><i class="iconfont iconleft"></i>网鼎杯 2020 青龙组jocker</a>
+    <a href="/2022/04/23/buuctf%E4%B8%A4%E9%81%93%E4%BC%91%E9%97%B2%E9%A2%98/">buuctf两道休闲题<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%91%E6%8E%A7%E5%88%86%E6%9E%90"><span class="toc-text">监控分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E6%B1%87%E7%BC%96%E5%88%86%E6%9E%90"><span class="toc-text">反汇编分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Sub-40100"><span class="toc-text">Sub_40100</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sub-401174"><span class="toc-text">Sub_401174</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sub-4011FC"><span class="toc-text">Sub_4011FC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Wupdmgr-exe"><span class="toc-text">Wupdmgr.exe</span></a></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="tencent://message/?Menu=yes&uin=2549294026 "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#12B7F5'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconQQ "></i>
+      </a><a 
+        href="javascript:; "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#09BB07'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconwechat-fill "></i>
+      </a><a 
+        href="https://github.com/zhaoo "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="mailto:2549294026@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">bubble down</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+
+<!-- 不蒜子统计 -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</footer>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

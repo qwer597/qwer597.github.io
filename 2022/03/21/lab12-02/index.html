@@ -1,0 +1,393 @@
+<script type='text/javascript' src='/js/myjs.js'></script>
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>lab12-2 - bubble down</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="代码结构
+sub_40149DApplicationN...">
+  <meta name="author" content="bubble-down">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: true
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '',
+          api: ''
+        },
+        motto: {
+          default: '莫等闲，白了少年头，空悲切',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="lock-screen">
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">lab12-2</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/archives " class="underline "> 归档</a>
+      </li><li class="menu-item">
+        <a href="/tags " class="underline "> 标签</a>
+      </li><li class="menu-item">
+        <a href="/categories" class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/about" class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">bubble down</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/0.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">lab12-2</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>March 21, 2022</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>1681</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <h2 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a><strong>代码结构</strong></h2><p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/1.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<h2 id="sub-40149D"><a href="#sub-40149D" class="headerlink" title="sub_40149D"></a><strong>sub_40149D</strong></h2><p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/2.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>ApplicationName作为存放进程路径的对象传入sub_40149D</p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/3.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>用GetSystemDirectoryA获取进程路径并拼接,得到系统程序svchost.exe的路径</p>
+<h2 id="sub-40132C"><a href="#sub-40132C" class="headerlink" title="sub_40132C"></a><strong>sub_40132C</strong></h2><p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/5.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>Findresource（确定指定模块中指定类型和名称的资源所在位置）<br>确定UNICODE和LOCALIZATION坐在被加密资源区的首地址<br>这里的hModule就是当前程序的句柄</p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/lab12-2%E8%A1%A5%E5%85%85.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>发现这段数据被加密，且类型和名称都符合反汇编的</p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/6.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>这里标注红色的call将资源节内的数据存放在VirtualAlloc开辟的空间内<br>之后检查PE文件标志，确定文件完好接下来在loc_40141B中调用sub_401000传入密码   ’41H’<br>sub_401000是对前文所说的加密资源节进行解密，</p>
+<h3 id="sub-401000"><a href="#sub-401000" class="headerlink" title="sub_401000"></a><strong>sub_401000</strong></h3><p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/8.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>这里的Xor不是习惯的寄存器清空操作 在ida动态调试时候，此处xor是逐字节解密  </p>
+<h2 id="sub-4010EA-进程替换）"><a href="#sub-4010EA-进程替换）" class="headerlink" title="sub_4010EA(进程替换）"></a><strong>sub_4010EA(进程替换）</strong></h2><p><strong>此函数是进程替换的核心函数</strong><br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/9.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/10.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>检测DOS头标志‘MZ’，NT头标志’PE’两个标志位分别是DOS段和NT段的首地址<br>在下文中对pe文件内数据读取的操作起到重要作用</p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/11.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>通过creatprocessA创建exe文件的线程并挂起，起始位置是0001<br>接着在0000位置创建长度为2CC的空间<br>GetThreadContext获得线程的上下文<br>本程序中在进程被挂起时候ebx保存进程控制块（PEB）的首地址<br>在context基础上+0xA4就是ebx</p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/12.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>对进程内存操作时候需要进程处于挂起状态</p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/13.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>线程Context结构体是记录线程某时刻所有寄存器的状态，就也就是上下文</p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/14.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/15.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>添加context结构体，方便分析</p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/16.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>在ida中添加context结构体后就可以对0xA4替换，发现ida自动识别为context结构体下的ebx寄存器<br>下一行指令加8就是在pcb上做偏移，这个位置是进程内存的虚拟内存位置<br>ReadProcessMemory函数将进程内存的内容存放到Buffer指向的位置（NtUnmapViewOfSection的参数）<br>此时buffer内容被更新为进程内存的虚拟内存位置</p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/17.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>GetModuleHandleA和GetProcAddress通常一起使用,在指定的windows函数库中调用指定的函数<br>此程序中在ntdll.dll中调用NtUnmapViewOfSection函数 ,NtUnmapViewOfSection的指针作为存在var_18里<br><strong>NtUnmapViewOfSection</strong>将Buffer的内容与参数中的进程的内存进行匹配，如果相同，删除进程内存</p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/18.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>[ebp+var_64]调用 NtUnmapViewOfSection</p>
+<p>删除内存后用VirtualAllocEx开辟新内存，这里var_8是pe文件的起始位置<br>+50h的偏移读取的数据是pe文件内存镜像的总尺寸<br>+34h是映像基址<br>这个位置将来放一个完整的pe文件</p>
+<p>WriteProcessMemory将IpBuffer内容复制到进程中<br>+54h的偏移是DOS和PE和区段总长度<br>也就是说将一个完整的pe文件写入上个函数开辟的空间</p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/19.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>之前已经判断出var_8是NT头首地址，所以可以再ida中添加NT结构体，ida会自动识别偏移在结构体中的位置</p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/21.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>接着是一个循环，var_70是循环的次数var_8+6的偏移是pe文件区段数</p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/22.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>下一步是对区块进行复制<br>区段是连续存放在pe文件中，且长度是28h<br>存放区段的首地址是NT头+f8h的偏移，也就是NT头长度是F8h</p>
+<p>+10h是区段头的偏移，表示区段在文件中的大小</p>
+<p>+14h表示区段在文件中的偏移<br>+0ch表示区段载入物理内存后的虚拟地址<br>所以每次循环将解密后的文件内容以区段的形式写入进程内存中</p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/Lab12-2/23.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>将解密后文件NT头的映像及地址写入进程的虚拟地址中，也就是让线程入口点改到解密后文件的oep，读取起始位置发生改变也是进程替换的步骤之一</p>
+<p>之后将context.eax设置成进程的oep</p>
+<p>NT+28h是进程入口点</p>
+<p>完成替换操作后，ResumeThread结束进程挂起状态</p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>bubble-down</li>
+    <li><strong>本文链接：</strong><a href="http://example.com/2022/03/21/lab12-02/index.html" title="http:&#x2F;&#x2F;example.com&#x2F;2022&#x2F;03&#x2F;21&#x2F;lab12-02&#x2F;index.html">http:&#x2F;&#x2F;example.com&#x2F;2022&#x2F;03&#x2F;21&#x2F;lab12-02&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/PE/" rel="tag">PE</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2022/03/22/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"><i class="iconfont iconleft"></i>汇编学习记录</a>
+    <a></a>
+  </nav>
+
+      </section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84"><span class="toc-text">代码结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sub-40149D"><span class="toc-text">sub_40149D</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sub-40132C"><span class="toc-text">sub_40132C</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sub-401000"><span class="toc-text">sub_401000</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sub-4010EA-%E8%BF%9B%E7%A8%8B%E6%9B%BF%E6%8D%A2%EF%BC%89"><span class="toc-text">sub_4010EA(进程替换）</span></a></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="tencent://message/?Menu=yes&uin=2549294026 "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#12B7F5'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconQQ "></i>
+      </a><a 
+        href="javascript:; "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#09BB07'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconwechat-fill "></i>
+      </a><a 
+        href="https://github.com/zhaoo "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="mailto:2549294026@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">bubble down</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+
+<!-- 不蒜子统计 -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</footer>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

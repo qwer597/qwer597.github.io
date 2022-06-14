@@ -1,0 +1,394 @@
+<script type='text/javascript' src='/js/myjs.js'></script>
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DLL调用及创建 - bubble down</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="①DLL文件是怎么产生的
+庞杂的整体程序在实际运行时，...">
+  <meta name="author" content="bubble-down">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: true
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '',
+          api: ''
+        },
+        motto: {
+          default: '莫等闲，白了少年头，空悲切',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="lock-screen">
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">DLL调用及创建</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/archives " class="underline "> 归档</a>
+      </li><li class="menu-item">
+        <a href="/tags " class="underline "> 标签</a>
+      </li><li class="menu-item">
+        <a href="/categories" class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/about" class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">bubble down</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/dll%E5%88%9B%E5%BB%BA/planets-g8d474a99d_1920.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">DLL调用及创建</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>March 22, 2022</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>2554</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <p>①DLL文件是怎么产生的</p>
+<p>庞杂的整体程序在实际运行时，不同功能的程序使用频率不尽相同。甚至出现特定代码块长时间无用，但是还需要反复加载，造成<strong>CUP</strong>资源浪费,于是许多应用程序被分割成一些相对独立的动态链接库，放置于系统中，就产生了DLL文件。</p>
+<p>②DLL文件是什么</p>
+<p>DLL(Dynamic Link Library)文件为动态链接库文件，又称“应用程序拓展”，是软件文件类型。在Windows中，许多应用程序并不是一个完整的可执行文件，它们被分割成一些相对独立的动态链接库，即DLL文件，放置于系统中。当我们执行某一个程序时，相应的DLL文件就会被调用。一个应用程序可使用多个DLL文件，一个DLL文件也可能被不同的应用程序使用，这样的DLL文件被称为共享DLL文件。</p>
+<p>③DLL文件有什么用</p>
+<p>DLL文件中存放的是各类程序的函数(子过程)实现过程，当程序需要调用函数时需要先载入DLL，然后取得函数的地址，最后进行调用。使用DLL文件的好处是程序不需要在运行之初加载所有代码，只有在程序需要某个函数的时候才从DLL中取出。另外，使用DLL文件还可以减小程序的体积。<br>在 Windows操作系统中，每个程序都可以使用该 DLL 中包含的功能来实现“打开”对话框。这有助于促进代码重用和内存的有效使用。<br>通过使用 DLL，程序可以实现模块化，由相对独立的组件组成。例如，一个记账程序可以按模块来销售。可以在运行时将各个模块加载到主程序中（如果安装了相应模块）。因为模块是彼此独立的，所以程序的加载速度更快，而且模块只在相应的功能被请求时才加载。<br>此外，可以更为容易地将更新应用于各个模块，而不会影响该程序的其他部分。例如，您可能具有一个工资计算程序，而税率每年都会更改。当这些更改被隔离到 DLL 中以后，您无需重新生成或安装整个程序就可以应用更新。</p>
+<h2 id="1-DLL编写"><a href="#1-DLL编写" class="headerlink" title="1 DLL编写"></a>1 DLL编写</h2><p>用vs创建DLL文件，只需要用到pch.cpp,pch.h和framwork.h<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/dll%E5%88%9B%E5%BB%BA/image1.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p><strong>hMoudle</strong>是动态库被调用时所传递来的一个指向自己的句柄(实际上，它是指向_DGROUP段的一个选择符) </p>
+<p><strong>ul_reason_for_call</strong>是一个说明动态库被调原因的标志，当进程或线程装入或卸载动态链接库的时候，操作系统调用入口函数，并说明动态链接库被调用的原因，它所有的可能值为：</p>
+<pre><code>            - DLL_PROCESS_ATTACH: 进程被调用
+            - DLL_THREAD_ATTACH: 线程被调用
+            - DLL_PROCESS_DETACH: 进程被停止
+            - DLL_THREAD_DETACH: 线程被停止
+</code></pre>
+<p><strong>lpReserved</strong>为保留参数</p>
+<p>在pch.cpp中写入功能函数体<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/dll%E5%88%9B%E5%BB%BA/image2.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p>由于C++支持函数重载，而C语言不支持，因此函数被C++编译后在符号库中的名字是与C语言不同的；C++编译后的函数需要加上参数的类型才能唯一标定重载后的函数，而加上extern “C”后，是为了向编译器指明这段代码按照C语言的方式进行编译</p>
+<p>因为此文件是cpp所以不用添加     extern C</p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/dll%E5%88%9B%E5%BB%BA/image3.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/dll%E5%88%9B%E5%BB%BA/image4.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>接着生成解决方法，在Debug或者Release文件里存在lib和dll文件</p>
+<h2 id="2静态调用"><a href="#2静态调用" class="headerlink" title="2静态调用"></a>2静态调用</h2><p>生成新的操作台程序在文件目录添加上一节生成的lib，dll，framework.h，pch.h四个文件</p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/dll%E5%88%9B%E5%BB%BA/image5.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p>运行文件后将dll文件添加到debug文件内</p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/dll%E5%88%9B%E5%BB%BA/image6.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<h2 id="3动态调用"><a href="#3动态调用" class="headerlink" title="3动态调用"></a>3动态调用</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;windows.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a, b;</span><br><span class="line">    cout &lt;&lt; &quot;动态加载&quot; &lt;&lt; endl;</span><br><span class="line">    HINSTANCE handle = LoadLibraryA(&quot;Dll1.dll&quot;);</span><br><span class="line">    typedef int(*addproc)(int, int);//函数声明</span><br><span class="line">    typedef int(*subproc)(int, int);</span><br><span class="line"></span><br><span class="line">    addproc add = (addproc)GetProcAddress(handle, &quot;add&quot;);</span><br><span class="line">    subproc sub = (subproc)GetProcAddress(handle, &quot;sub&quot;);</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; &quot;input Number a:&quot;;</span><br><span class="line">    cin &gt;&gt; a;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; &quot;input Number b:&quot;;</span><br><span class="line">    cin &gt;&gt; b;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; &quot;a+b=&quot; &lt;&lt; add(a, b) &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; &quot;a-b=&quot; &lt;&lt; sub(a, b) &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    FreeLibrary(handle);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>GetProcAddress</strong><br>是一个计算机函数，功能是检索指定的动态链接库(DLL)中的输出库函数地址。lpProcName参数能够识别DLL中的函数。<br>结构   	FARPROC GetProcAddress(HMODULE hModule, &#x2F;&#x2F; DLL模块句<br>LPCSTR lpProcName &#x2F;&#x2F; 函数名);<br>头文件: 在Winbase.h中声明，include Windows.h。<br>库文件: Use Kernel32.lib。</p>
+<p><strong>LoadLibrary</strong><br>Unicode和ANSI名称<br>LoadLibraryW（Unicode）和LoadLibraryA（ANSI）</p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>bubble-down</li>
+    <li><strong>本文链接：</strong><a href="http://example.com/2022/03/22/DLL%E8%B0%83%E7%94%A8%E5%8F%8A%E5%88%9B%E5%BB%BA/index.html" title="http:&#x2F;&#x2F;example.com&#x2F;2022&#x2F;03&#x2F;22&#x2F;DLL%E8%B0%83%E7%94%A8%E5%8F%8A%E5%88%9B%E5%BB%BA&#x2F;index.html">http:&#x2F;&#x2F;example.com&#x2F;2022&#x2F;03&#x2F;22&#x2F;DLL%E8%B0%83%E7%94%A8%E5%8F%8A%E5%88%9B%E5%BB%BA&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DLL/" rel="tag">DLL</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2022/04/14/%E9%94%AE%E7%9B%98%E9%92%A9%E5%AD%90/"><i class="iconfont iconleft"></i>键盘钩子</a>
+    <a href="/2022/03/22/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">汇编学习记录<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-DLL%E7%BC%96%E5%86%99"><span class="toc-text">1 DLL编写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E9%9D%99%E6%80%81%E8%B0%83%E7%94%A8"><span class="toc-text">2静态调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E5%8A%A8%E6%80%81%E8%B0%83%E7%94%A8"><span class="toc-text">3动态调用</span></a></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="tencent://message/?Menu=yes&uin=2549294026 "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#12B7F5'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconQQ "></i>
+      </a><a 
+        href="javascript:; "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#09BB07'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconwechat-fill "></i>
+      </a><a 
+        href="https://github.com/zhaoo "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="mailto:2549294026@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">bubble down</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+
+<!-- 不蒜子统计 -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</footer>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

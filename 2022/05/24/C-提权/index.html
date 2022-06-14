@@ -1,0 +1,395 @@
+<script type='text/javascript' src='/js/myjs.js'></script>
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>C++提权 - bubble down</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="C++提权
+流程打开进程访问令牌取得特权的LUID值调...">
+  <meta name="author" content="bubble-down">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: true
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '',
+          api: ''
+        },
+        motto: {
+          default: '莫等闲，白了少年头，空悲切',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="lock-screen">
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">C++提权</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/archives " class="underline "> 归档</a>
+      </li><li class="menu-item">
+        <a href="/tags " class="underline "> 标签</a>
+      </li><li class="menu-item">
+        <a href="/categories" class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/about" class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">bubble down</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/C%2B%2B%E6%8F%90%E6%9D%83.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">C++提权</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>May 24, 2022</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>4050</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <p>C++提权</p>
+<h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><p>打开进程访问令牌<br>取得特权的LUID值<br>调整访问令牌特权值</p>
+<h1 id="使用函数"><a href="#使用函数" class="headerlink" title="使用函数"></a>使用函数</h1><p>OpenProcessToken();<br> LookupPrivilegeValue();<br> AdjustTokenPrivileges();</p>
+<h1 id="函数介绍及大致流程"><a href="#函数介绍及大致流程" class="headerlink" title="函数介绍及大致流程"></a>函数介绍及大致流程</h1><p>首先要获得进程访问令牌的句柄，这可以通过<strong>OpenProcessToken</strong>得到，函数的原型如下：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">BOOL</span> OpenProcessToken(</span><br><span class="line"></span><br><span class="line">HANDLE ProcessHandle, <span class="comment">//要修改访问权限的进程句柄</span></span><br><span class="line"></span><br><span class="line">DWORD DesiredAccess, <span class="comment">//要对令牌进行何种操作</span></span><br><span class="line"></span><br><span class="line">PHANDLE TokenHandle <span class="comment">//返回的访问令牌指针</span></span><br><span class="line"></span><br><span class="line">)；</span><br></pre></td></tr></table></figure>
+
+<p>第一参数是要修改访问权限的进程句柄；第三个参数就是返回的访问令牌指针；第二个参数指定你要进行的操作类型，如要修改访问令牌的特权，我们要指定第二个参数TOKEN_ADJUST_PRIVILEGES。通过这个函数我们就可以得到当前进程的访问令牌的句柄（指定函数的第一个参数为GetCurrentProcess()就可以了）。接着我们可以调用AdjustTokenPrivileges对这个访问令牌进行修改。<br> <strong>AdjustTokenPrivileges的原型如下：</strong></p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">BOOL</span> AdjustTokenPrivileges(</span><br><span class="line">HANDLE TokenHandle, <span class="comment">// handle to token</span></span><br><span class="line"><span class="type">BOOL</span> DisableAllPrivileges, <span class="comment">// disabling option</span></span><br><span class="line">PTOKEN_PRIVILEGES NewState, <span class="comment">// privilege information</span></span><br><span class="line">DWORD BufferLength, <span class="comment">// size of buffer</span></span><br><span class="line">PTOKEN_PRIVILEGES PreviousState, <span class="comment">// original state buffer</span></span><br><span class="line">PDWORD ReturnLength <span class="comment">// required buffer size</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>第一个参数是访问令牌的句柄；第二个参数决定是进行权限修改还是丧失（Disable）所有权限；第三个参数指明要修改的权限，是一个指向<strong>TOKEN_PRIVILEGES</strong>结构的指针，该结构包含一个数组，数据组的每个项指明了权限的类型和要进行的操作; 第四个参数是结构PreviousState 指针所指向的缓冲区的大小，如果PreviousState参数为空，该参数应为NULL；第五个参数也是一个指向<strong>TOKEN_PRIVILEGES</strong>结构的指针，存放修改前的访问权限的信息，可空；最后一个参数为实际PRIVILEGES NewState结构返回的大小。在使用这个函数前再看一下<strong>TOKEN_PRIVILEGES</strong>这个结构，其声明如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_TOKEN_PRIVILEGES</span> &#123;</span><br><span class="line">DWORD PrivilegeCount;</span><br><span class="line">LUID_AND_ATTRIBUTES Privileges[];</span><br><span class="line">&#125; TOKEN_PRIVILEGES, *PTOKEN_PRIVILEGES;</span><br></pre></td></tr></table></figure>
+
+<p>PrivilegeCount指的数组元素的个数，接着是一个<strong>LUID_AND_ATTRIBUTES</strong>类型的数组，再来看一下<strong>LUID_AND_ATTRIBUTES</strong>这个结构的内容，声明如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_LUID_AND_ATTRIBUTES</span> &#123;</span><br><span class="line">LUID Luid;</span><br><span class="line">DWORD Attributes;</span><br><span class="line">&#125; LUID_AND_ATTRIBUTES, *PLUID_AND_ATTRIBUTES</span><br></pre></td></tr></table></figure>
+
+<p>第二个参数就指明了我们要进行的操作类型，其特权属性Attributes可以是如下常量：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SE_PRIVILEGE_ENABLED <span class="comment">//使特权有效</span></span><br><span class="line">SE_PRIVILEGE_ENABLED_BY_DEFAULT <span class="comment">//使特权默认有效</span></span><br><span class="line">SE_PRIVILEGE_REMOVED <span class="comment">//移除该特权</span></span><br><span class="line">SE_PRIVILEGE_USED_FOR_ACCESS <span class="comment">//取得对象或服务的访问权</span></span><br></pre></td></tr></table></figure>
+
+<p>要使用一个权限就指定Attributes为<strong>SE_PRIVILEGE_ENABLED</strong>。第一个参数就是指权限的类型，是一个LUID的值，LUID就是指locally unique identifier（局部唯一标识符），我想GUID大家是比较熟悉的，和GUID的要求保证全局唯一不同，LUID只要保证局部唯一，就是指在系统的每一次运行期间保证是唯一的就可以了。另外和GUID相同的一点，LUID也是一个64位的值，相信大家都看过GUID那一大串的值，我们要怎么样才能知道一个权限对应的LUID值是多少呢？</p>
+<p><strong>这就要用到另外一个API函数LookupPrivilegevalue，其原形如下：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL <span class="title">LookupPrivilegevalue</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">LPCTSTR lpSystemName, <span class="comment">// system name</span></span></span></span><br><span class="line"><span class="params"><span class="function">LPCTSTR lpName, <span class="comment">// privilege name</span></span></span></span><br><span class="line"><span class="params"><span class="function">PLUID lpLuid <span class="comment">// locally unique identifier</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>第一个参数是系统的名称，如果是本地系统只要指明为NULL就可以了，第三个参数就是返回LUID的指针，第二个参数就是指明了权限的名称，如“SeDebugPrivilege”。在Winnt.h中还定义了一些权限名称的宏，如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> SE_BACKUP_NAME TEXT(<span class="string">&quot;SeBackupPrivilege&quot;</span>)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SE_RESTORE_NAME TEXT(<span class="string">&quot;SeRestorePrivilege&quot;</span>)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SE_SHUTDOWN_NAME TEXT(<span class="string">&quot;SeShutdownPrivilege&quot;</span>)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SE_DEBUG_NAME TEXT(<span class="string">&quot;SeDebugPrivilege&quot;</span>)</span></span><br></pre></td></tr></table></figure>
+
+<p>这样通过这三个函数的调用，我们就可以用OpenProcess(PROCESS_ALL_ACCESS,FALSE, dwProcessID)来打获得任意进程的句柄，并且指定了所有的访问权</p>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    HANDLE token_handle;</span><br><span class="line">    <span class="comment">//打开访问令牌</span></span><br><span class="line">    <span class="keyword">if</span>(!<span class="built_in">OpenProcessToken</span>(<span class="built_in">GetCurrentProcess</span>(),       <span class="comment">//要修改权限的进程句柄</span></span><br><span class="line">                         TOKEN_ALL_ACCESS,          <span class="comment">//要对令牌进行何种操作</span></span><br><span class="line">                         &amp;token_handle              <span class="comment">//访问令牌</span></span><br><span class="line">                         ))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;openProcessToken error&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    LUID luid;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="built_in">LookupPrivilegeValue</span>(<span class="literal">NULL</span>,                 <span class="comment">//查看的系统，本地为NULL</span></span><br><span class="line">                             SE_DEBUG_NAME,        <span class="comment">//要查看的特权名称</span></span><br><span class="line">                             &amp;luid                 <span class="comment">//用来接收标识符</span></span><br><span class="line">                             ))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;lookupPrivilegevalue error&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    TOKEN_PRIVILEGES tkp;</span><br><span class="line">    tkp.PrivilegeCount = <span class="number">1</span>;</span><br><span class="line">    tkp.Privileges[<span class="number">0</span>].Luid = luid;</span><br><span class="line">    tkp.Privileges[<span class="number">0</span>].Attributes = SE_PRIVILEGE_ENABLED;</span><br><span class="line">    <span class="comment">//调整访问令牌权限</span></span><br><span class="line">    <span class="keyword">if</span>(!<span class="built_in">AdjustTokenPrivileges</span>(token_handle,    <span class="comment">//令牌句柄</span></span><br><span class="line">                              FALSE,           <span class="comment">//是否禁用权限</span></span><br><span class="line">                              &amp;tkp,            <span class="comment">//新的特权的权限信息</span></span><br><span class="line">                              <span class="built_in">sizeof</span>(tkp),     <span class="comment">//特权信息大小</span></span><br><span class="line">                              <span class="literal">NULL</span>,            <span class="comment">//用来接收特权信息当前状态的buffer</span></span><br><span class="line">                              <span class="literal">NULL</span>             <span class="comment">//缓冲区大小</span></span><br><span class="line">                              ))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;adjust error&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;sucessful&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Privilege Constants（特权常数）</p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>bubble-down</li>
+    <li><strong>本文链接：</strong><a href="http://example.com/2022/05/24/C-%E6%8F%90%E6%9D%83/index.html" title="http:&#x2F;&#x2F;example.com&#x2F;2022&#x2F;05&#x2F;24&#x2F;C-%E6%8F%90%E6%9D%83&#x2F;index.html">http:&#x2F;&#x2F;example.com&#x2F;2022&#x2F;05&#x2F;24&#x2F;C-%E6%8F%90%E6%9D%83&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%90%E6%9D%83/" rel="tag">提权</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a href="/2022/06/14/hello-world/"><i class="iconfont iconleft"></i>Hello World</a>
+    <a href="/2022/05/21/Windbg%E5%8F%8C%E6%9C%BA%E8%B0%83%E8%AF%95/">Windbg双机内核调试环境配置<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B"><span class="toc-text">流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">使用函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%A4%A7%E8%87%B4%E6%B5%81%E7%A8%8B"><span class="toc-text">函数介绍及大致流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">代码实现</span></a></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="tencent://message/?Menu=yes&uin=2549294026 "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#12B7F5'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconQQ "></i>
+      </a><a 
+        href="javascript:; "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#09BB07'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconwechat-fill "></i>
+      </a><a 
+        href="https://github.com/zhaoo "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="mailto:2549294026@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">bubble down</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+
+<!-- 不蒜子统计 -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</footer>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
