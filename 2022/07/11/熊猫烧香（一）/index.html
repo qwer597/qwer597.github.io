@@ -1,0 +1,375 @@
+<script type='text/javascript' src='/js/myjs.js'></script>
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>熊猫烧香（一） - bubble down</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="
+行为分析注册表随机数的修改操作在命令行页有操作，此处...">
+  <meta name="author" content="bubble-down">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: true
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '',
+          api: ''
+        },
+        motto: {
+          default: '莫等闲，白了少年头，空悲切',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="lock-screen">
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">熊猫烧香（一）</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/link " class="underline "> 友链</a>
+      </li><li class="menu-item">
+        <a href="/archives " class="underline "> 归档</a>
+      </li><li class="menu-item">
+        <a href="/tags " class="underline "> 标签</a>
+      </li><li class="menu-item">
+        <a href="/categories" class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/about" class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">bubble down</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/0.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">熊猫烧香（一）</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>July 11, 2022</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>1548</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%877.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%878.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<h2 id="行为分析"><a href="#行为分析" class="headerlink" title="行为分析"></a>行为分析</h2><p><img    class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%871.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">注册表随机数的修改操作</span><br><img    class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%872.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">在命令行页有操作，此处去除硬盘共享和系统共享
+</span><br><img    class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%873.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">文件创建成功</span><br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%874.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>接下来对spoclsv.exe的行为分析发现大量对注册表run（自启动）的修改<br>其中包括google，macfee和windows等杀毒自启动项，甚至包括不常见的查毒程序<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%875.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>在注册表中创建隐藏项，并修改自己的自启动项<br>此处出现大量对tcp修改操作，验证了前面在网络行为监控中发现很多向外发送的信息的推断<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%876.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>创建inf自启动文件，和ini文件（类似注册表）</p>
+<h2 id="程序分析"><a href="#程序分析" class="headerlink" title="程序分析"></a>程序分析</h2><p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%879.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>在sub_403c98之前的这部分是delphi的初始化部分<br><strong>Sub_403C98</strong><br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%8711.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>函数的功能是生成字符串，被调用两次，返回值分别是两个不同的地址，并分别保存在第一个参数中，此图为两个地址对应的两个字符串<br><strong>Sub_405360</strong><br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%8712.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>Sub_4040BC只是对内存做lock锁定<br>其他函数都不重要仅仅是变量的处理，接下来的do-while循环是重点<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%8714.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>将参数++戊+缓”叛<em>聋+肛+删”蚊</em>苜+兆++<br>依次与xboy中的一个字母xor解码<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%8715.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>运行到紫色框位置时会出现一个地址00AE0078<br>这是setup.00403E2C函数的返回值<br>Set.00403ed4将“++戊+缓“叛<em>聋+肛+删”蚊</em>苜+兆++”的异或解密结果存在地址00AE0078<br><strong>Sub_404018</strong><br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%8716.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>此函数用来验证上边函数解码结果和武汉男生的字符串是否一样<br>我们可以在OD中看到两个字符串一样<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%8718.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>这三个函数是病毒的三个主要功能<br>复制，传染文件并运行<br>感染其他文件<br>设置注册表，阻止杀毒软件查杀<br>这三大功能在前面的行为分析中都能看到</p>
+<h3 id="Sub-408024"><a href="#Sub-408024" class="headerlink" title="Sub_408024"></a>Sub_408024</h3><p><strong>Sub_40277C</strong><br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%8720.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>通过GetModuleFileName获得本体路径<br><strong>Sub_405684</strong><br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%8721.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>此函数返回值是一个地址保存获取样本所在文件路径<br><strong>Sub_403ED4</strong><br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%8722.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>此函数拼接一个新的ini文件路径路径<br><strong>Sub_4057A4</strong><br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%8723.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>通过FindFirstFileA查找Desktop.ini文件，如果找到ini文件跳转，并结束函数<br>否则继续创建并写入内容<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%8724.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>接下来程序要找到ini文件，通过SetFileAttributes更改ini文件属性0x80<br><strong>Sub_403ECC</strong><br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%8725.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>此函数的eax参数是一个pe文件首地址，delphi下字符串起始位置-4&#x3D;字符串长度<br>此函数返回值也是EC00<br><strong>Sub_40532c</strong><br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%8726.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>转化参数字符为大写<br><strong>判断感染判断</strong><br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E6%84%9F%E6%9F%93%E9%AA%8C%E8%AF%81%EF%BC%88%E8%A1%A5%EF%BC%89.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>此处的strcmp函数是sub_404018,通过比较当前本体目录和spoclsv的目录判断自身是不是感染程序，此处在后边分析<br><strong>Sub_4054bc</strong><br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%8727.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>Eax参数保存地址中存放系统目录的路径<br><strong>Sub_403f8c</strong><br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%8728.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>此函数的两个参数，返回值保存spoclsv的路径<br>此函数将系统路径与两个参数拼接成新路径<br>并在下个函数转化为大写<br><strong>Sub_40416C</strong><br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%8729.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>参数eax&#x3D;PE文件首地址，<br>Ebx&#x3D;PE文件长度<br>此函数结束后，PE文件长度从EC00编成EBFF<br><strong>Sub_4060D4</strong><br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%8730.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>第一部分三个函数查明spcolsv.exe是否运行，下边有一个无条件跳转<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%8731.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>无条件跳转到此位置，判断spcolsv是否存在，两种情况下都需要执行closeHandle函数关闭进程<br>虚线以上是不存在进程情况下的处理<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%8732.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>接下来就出现很多重复函数，总体来说是构造spoclsv.exe的目录并创建文件<br>SetFileAttributes修改基本属性<br>并通过CopyFile填充文件，实现传染的目的<br>WinExec函数执行spoclsv.exe后推出</p>
+<h3 id="判断感染判断"><a href="#判断感染判断" class="headerlink" title="判断感染判断"></a>判断感染判断</h3><p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%8733.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>接前文判断本体的跳转接着分析<br>跳转后需要对PE文件（前文出现的pe）的内容进行删改，其实也是样本自己<br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/qwer597.github.io/main/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99/%E5%9B%BE%E7%89%8734.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>跟着jmp往下跳来到loc_4085D3<br>var_8保存和标记对比后的结果</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>三大功能的第一个就分析完了，唉！样本分析还是要有耐心，如有不对的地方还请路过的大牛指点。</p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>bubble-down</li>
+    <li><strong>本文链接：</strong><a href="http://example.com/2022/07/11/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99%EF%BC%88%E4%B8%80%EF%BC%89/index.html" title="http:&#x2F;&#x2F;example.com&#x2F;2022&#x2F;07&#x2F;11&#x2F;%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99%EF%BC%88%E4%B8%80%EF%BC%89&#x2F;index.html">http:&#x2F;&#x2F;example.com&#x2F;2022&#x2F;07&#x2F;11&#x2F;%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99%EF%BC%88%E4%B8%80%EF%BC%89&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%A8%E9%A9%AC/" rel="tag">木马</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a></a>
+    <a href="/2022/06/14/hello-world/">Hello World<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90"><span class="toc-text">行为分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90"><span class="toc-text">程序分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Sub-408024"><span class="toc-text">Sub_408024</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%84%9F%E6%9F%93%E5%88%A4%E6%96%AD"><span class="toc-text">判断感染判断</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="tencent://message/?Menu=yes&uin=2549294026 "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#12B7F5'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconQQ "></i>
+      </a><a 
+        href="javascript:; "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#09BB07'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconwechat-fill "></i>
+      </a><a 
+        href="https://github.com/zhaoo "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="mailto:2549294026@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">bubble down</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+
+<!-- 不蒜子统计 -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</footer>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
