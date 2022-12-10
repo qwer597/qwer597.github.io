@@ -1,0 +1,380 @@
+<script type='text/javascript' src='/js/myjs.js'></script>
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>彩虹猫分析 - bubble down</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="description" content="彩虹猫的行为分析不好捕捉，网上也有不少的毒发视频和图片...">
+  <meta name="author" content="bubble-down">
+  <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+    
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1445822_p6ry5n7lrr.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+    
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css" name="highlight-style" mode="light">
+
+      
+        
+        
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" name="highlight-style" mode="dark">
+
+      
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      loading: {
+        gif: '/images/theme/loading.gif',
+        lottie: ''
+      },
+      lazyload: {
+        enable: true,
+        only_post: 'false',
+        loading: {
+          gif: '/images/theme/loading.gif',
+          lottie: ''
+        }
+      },
+      donate: {
+        enable: false,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        always_show: true
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: false
+      },
+      preview: {
+        background: {
+          default: '',
+          api: ''
+        },
+        motto: {
+          default: '莫等闲，白了少年头，空悲切',
+          typing: true,
+          api: '',
+          data_contents: '["data","content"]'
+        },
+      },
+      qrcode: {
+        enable: false,
+        type: 'url',
+        image: 'https://pic.izhaoo.com/weapp-code.jpg',
+      },
+      toc: {
+        enable: true
+      },
+      scrollbar: {
+        type: 'default'
+      },
+      notification: {
+        enable: false,
+        delay: 4500,
+        list: '',
+        page_white_list: '',
+        page_black_list: ''
+      },
+      search: {
+        enable: false,
+        path: ''
+      }
+    }
+  </script>
+
+  
+
+  
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="lock-screen">
+  <div class="loading" id="loading"></div>
+  
+    
+
+
+  <nav class="navbar">
+    <div class="left">
+      
+        <i class="iconfont iconhome j-navbar-back-home"></i>
+      
+      
+      
+        <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+      
+      
+    </div>
+    <div class="center">彩虹猫分析</div>
+    <div class="right">
+      <i class="iconfont iconmenu j-navbar-menu"></i>
+    </div>
+    
+  </nav>
+
+  
+  
+
+<nav class="menu">
+  <div class="menu-container">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content"><li class="menu-item">
+        <a href="/link " class="underline "> 友链</a>
+      </li><li class="menu-item">
+        <a href="/archives " class="underline "> 归档</a>
+      </li><li class="menu-item">
+        <a href="/tags " class="underline "> 标签</a>
+      </li><li class="menu-item">
+        <a href="/categories" class="underline "> 分类</a>
+      </li><li class="menu-item">
+        <a href="/about" class="underline "> 关于</a>
+      </li></ul>
+    
+      <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">bubble down</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+    
+  </div>
+</nav>
+  <main id="main">
+  <div class="article-wrap">
+    <div class="row container">
+      <div class="col-xl-3"></div>
+      <div class="col-xl-6"><article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/%E5%BD%A9%E8%99%B9%E7%8C%AB/0.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">彩虹猫分析</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>August 20, 2022</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>1058</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        
+        <p>彩虹猫的行为分析不好捕捉，网上也有不少的毒发视频和图片，再次就不过多重复了</p>
+<h1 id="样本流程概览"><a href="#样本流程概览" class="headerlink" title="样本流程概览"></a>样本流程概览</h1><p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/%E5%BD%A9%E8%99%B9%E7%8C%AB/%E5%9B%BE%E7%89%871.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<h1 id="细节信息分析"><a href="#细节信息分析" class="headerlink" title="细节信息分析"></a>细节信息分析</h1><p><img    class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/%E5%BD%A9%E8%99%B9%E7%8C%AB/%E5%9B%BE%E7%89%872.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">出现大量网络活动</span><br><img    class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/%E5%BD%A9%E8%99%B9%E7%8C%AB/%E5%9B%BE%E7%89%873.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">获取CMD命令</span><br>RtlAdjustPrivilege<br>NtRaiseHardError<br>SetWindowsHookExW<br>找出几个危险函数</p>
+<p><img    class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/%E5%BD%A9%E8%99%B9%E7%8C%AB/%E5%9B%BE%E7%89%874.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">一般的正常程序是不会直接加载内核dll的</span><br><strong>PlaySoundA 播放声音</strong><br><strong>ShellExecuteW   shell</strong><br><strong>SetCursorPos移动光标</strong><br>同时发现这几个函数和毒发时很多行为有关<br><img    class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/%E5%BD%A9%E8%99%B9%E7%8C%AB/%E5%9B%BE%E7%89%875.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">没有发现存在循环里的xor、add,初步判断没有加解密内容</span></p>
+<h1 id="静态代码分析"><a href="#静态代码分析" class="headerlink" title="静态代码分析"></a>静态代码分析</h1><p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/%E5%BD%A9%E8%99%B9%E7%8C%AB/%E5%9B%BE%E7%89%876.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<h2 id="Sub-40114A"><a href="#Sub-40114A" class="headerlink" title="Sub_40114A"></a>Sub_40114A</h2><p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/%E5%BD%A9%E8%99%B9%E7%8C%AB/%E5%9B%BE%E7%89%877.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>通过遍历进程快照的进程名称查找同名进程并用v4计数，如果没有那么执行sub_401021</p>
+<h2 id="Sub-401000"><a href="#Sub-401000" class="headerlink" title="Sub_401000"></a>Sub_401000</h2><p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/%E5%BD%A9%E8%99%B9%E7%8C%AB/%E5%9B%BE%E7%89%878.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>这两个参数负责判断窗口和会话是否结束，<br>也就是日过用户手动关闭MEMZ进程会调用Sub_401021</p>
+<h2 id="Sub-401021"><a href="#Sub-401021" class="headerlink" title="Sub_401021"></a>Sub_401021</h2><h3 id="StartAddress"><a href="#StartAddress" class="headerlink" title="StartAddress"></a>StartAddress</h3><p><img    class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/%E5%BD%A9%E8%99%B9%E7%8C%AB/%E5%9B%BE%E7%89%879.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="   ><span class="image-caption">sub_401A55用于生成随机数在fn中创建窗口通过sub_401A55随机窗口尺寸</span></p>
+<p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/%E5%BD%A9%E8%99%B9%E7%8C%AB/%E5%9B%BE%E7%89%8710.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>这部分是startaddress下的程序<br>Sub_401021通过while无条件循环创建20个StartAddres线程<br>随后SeShutdownPrivilege用于关闭系统（已被禁用）<br>后边是通过恶意API导致蓝屏</p>
+<p>RtlAdjustPrivilege<br>NtRaiseHardError都是未公开API，只能通过显式调用</p>
+<h2 id="MBR入侵"><a href="#MBR入侵" class="headerlink" title="MBR入侵"></a>MBR入侵</h2><p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/%E5%BD%A9%E8%99%B9%E7%8C%AB/%E5%9B%BE%E7%89%8711.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>通过writefile将byte_402248和byte_402118写入mbr文件内存<br>由于mbr标准文件总长512字节，再写入第二组数据时候只跳过510字节，MBR结束符55h  AAh这两个字节放在第二组数据的起始位置<br>推测第二组数据可能式毒发时的照片或者声音播放程序和音频数据<br>随后打开note.txt展示胜利宣言</p>
+<h2 id="毒发行为"><a href="#毒发行为" class="headerlink" title="毒发行为"></a>毒发行为</h2><p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/%E5%BD%A9%E8%99%B9%E7%8C%AB/%E5%9B%BE%E7%89%8713.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/%E5%BD%A9%E8%99%B9%E7%8C%AB/%E5%9B%BE%E7%89%8714.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>V9是类似结构体的方式存储，总长是8字节，前4字节是个函数地址，后4字节是数据<br>已经将对应的汇编附在伪C后，从汇编中清晰看到数据偏移长度<br>在第一组数据中v9[1]是7530h作为Sleep()参数<br>下边的v9自增是指针挪到下一个结构体的起始地址<br>V8计数总共创建10次线程<br>这些结构体里的函数都是可视化而已行为的函数，感兴趣的可以自行分析，这里就不多做解释了</p>
+<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p><img   class="lazyload" data-original="https://raw.githubusercontent.com/qwer597/123456aaa/main/%E5%BD%A9%E8%99%B9%E7%8C%AB/%E5%9B%BE%E7%89%8715.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>两个massagebox被确认后获取自身的进程名，并运行5个自己<br>随后通过pExecInfo结构体写入进程信息<br>参数是&#x2F;main<br>通过shellExecutExw运行<br>最后SetPriorityClass（）将进程相应优先级提到最高</p>
+
+      </section>
+      <section class="extra">
+        
+          <ul class="copyright">
+  
+    <li><strong>本文作者：</strong>bubble-down</li>
+    <li><strong>本文链接：</strong><a href="http://example.com/2022/08/20/%E5%BD%A9%E8%99%B9%E7%8C%AB%E5%88%86%E6%9E%90/index.html" title="http:&#x2F;&#x2F;example.com&#x2F;2022&#x2F;08&#x2F;20&#x2F;%E5%BD%A9%E8%99%B9%E7%8C%AB%E5%88%86%E6%9E%90&#x2F;index.html">http:&#x2F;&#x2F;example.com&#x2F;2022&#x2F;08&#x2F;20&#x2F;%E5%BD%A9%E8%99%B9%E7%8C%AB%E5%88%86%E6%9E%90&#x2F;index.html</a></li>
+    <li><strong>版权声明：</strong>本博客所有文章均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" title="BY-NC-SA" target="_blank" rel="noopener">BY-NC-SA</a> 许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%A8%E9%A9%AC/" rel="tag">木马</a></li></ul> 
+
+        
+  <nav class="nav">
+    <a></a>
+    <a href="/2022/07/20/%E7%86%8A%E7%8C%AB%E7%83%A7%E9%A6%99%EF%BC%88%E4%BA%8C%EF%BC%89/">熊猫烧香（二）“<i class="iconfont iconright"></i></a>
+  </nav>
+
+      </section>
+      
+    </section>
+  </div>
+</article></div>
+      <div class="col-xl-3">
+        
+          
+  <aside class="toc-wrap">
+    <h3 class="toc-title">文章目录：</h3>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%B7%E6%9C%AC%E6%B5%81%E7%A8%8B%E6%A6%82%E8%A7%88"><span class="toc-text">样本流程概览</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%86%E8%8A%82%E4%BF%A1%E6%81%AF%E5%88%86%E6%9E%90"><span class="toc-text">细节信息分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-text">静态代码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Sub-40114A"><span class="toc-text">Sub_40114A</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sub-401000"><span class="toc-text">Sub_401000</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sub-401021"><span class="toc-text">Sub_401021</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#StartAddress"><span class="toc-text">StartAddress</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MBR%E5%85%A5%E4%BE%B5"><span class="toc-text">MBR入侵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AF%92%E5%8F%91%E8%A1%8C%E4%B8%BA"><span class="toc-text">毒发行为</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E5%B0%BE"><span class="toc-text">结尾</span></a></li></ol></li></ol>
+  </aside>
+
+        
+      </div>
+    </div>
+  </div>
+</main>
+  
+
+
+<footer class="footer">
+  <div class="footer-social"><a 
+        href="tencent://message/?Menu=yes&uin=2549294026 "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#12B7F5'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconQQ "></i>
+      </a><a 
+        href="javascript:; "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#09BB07'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconwechat-fill "></i>
+      </a><a 
+        href="https://github.com/zhaoo "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color= '#9f7be1'" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  icongithub-fill "></i>
+      </a><a 
+        href="mailto:2549294026@qq.com "
+        target="_blank"
+        class="footer-social-item"
+        onMouseOver="this.style.color=#FF3B00" 
+        onMouseOut="this.style.color='#33333D'">
+          <i class="iconfont  iconmail"></i>
+      </a></div>
+  
+    <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">bubble down</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  
+
+<!-- 不蒜子统计 -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</footer>
+
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+  
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
